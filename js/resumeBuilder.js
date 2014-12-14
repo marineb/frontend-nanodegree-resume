@@ -7,9 +7,9 @@ var bio = {
   "contacts": {
     "mobile": "718-306-4448",
     "email": "m14868@gmail.com",
-    "twitter": "@marineboudeau",
-    "github": "@marineb",
-    "location": "Brooklyn"
+    "twitter": "marineboudeau",
+    "github": "marineb",
+    "location": "Brooklyn, NY"
   },
   "pic": "https://pbs.twimg.com/profile_images/514738027839893504/cLnPXQ_X.jpeg",
   "welcome": "Hi, it's me. I like to build things."
@@ -18,6 +18,13 @@ var bio = {
 HTMLheaderName = HTMLheaderName.replace("%data%", bio.name);
 HTMLheaderRole = HTMLheaderRole.replace("%data%", bio.title);
 $("#header").prepend(HTMLheaderName+HTMLheaderRole);
+
+HTMLbioPic = HTMLbioPic.replace("%data%", bio.pic);
+$("#header").prepend(HTMLbioPic);
+
+HTMLWelcomeMsg = HTMLWelcomeMsg.replace("%data%", bio.welcome);
+$("#header").append(HTMLWelcomeMsg);
+
 if (bio.skills.length > 0) {
   $("#header").append(HTMLskillsStart);
   for (skill in bio.skills) {
@@ -36,11 +43,6 @@ HTMLgithub = HTMLgithub.replace("%data%", bio.contacts.github);
 $("#topContacts").append(HTMLgithub);
 HTMLlocation = HTMLlocation.replace("%data%", bio.contacts.location);
 $("#topContacts").append(HTMLlocation);
-
-HTMLbioPic = HTMLbioPic.replace("%data%", bio.pic);
-$("#header").append(HTMLbioPic);
-HTMLWelcomeMsg = HTMLWelcomeMsg.replace("%data%", bio.welcome);
-$("#header").append(HTMLWelcomeMsg);
 
 
 
@@ -62,10 +64,10 @@ var work = {
   }
 ]};
 
-var displayWork = function() {
+work.display = function() {
   if (work.jobs.length > 0) {
-    $("#workExperience").append(HTMLworkStart);
     for (job in work.jobs) {
+      $("#workExperience").append(HTMLworkStart);
       var jobEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
       var jobTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
       var jobRole = HTMLworkDescription.replace("%data%", work.jobs[job].role);
@@ -75,7 +77,7 @@ var displayWork = function() {
   }
 }
 
-displayWork();
+work.display();
 
 
 var projects = {

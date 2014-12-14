@@ -1,7 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700);
+
 *{
     padding:0;
     margin:0;
-    font-family: 'Roboto', sans-serif;
+    font: normal 14px/21px 'Open Sans', sans-serif;
+    color: #444;
 }
 
 .clearfix {
@@ -14,17 +17,15 @@
 }
 
 h1 {
-
   font-size: 40px;
-  color: #F5A623;
   line-height: 48px;
   display: inline;
+  font-weight: normal;
 }
 
 h2 {
-  font-style: bold;
   font-size: 24px;
-  color: #999999;
+  color: #999;
   line-height: 29px;
   padding: 10px;
 }
@@ -32,7 +33,6 @@ h2 {
 h3 {
   font-style: italic;
   font-size: 20px;
-  color: #000000;
   line-height: 22px;
 }
 
@@ -49,7 +49,6 @@ h2, h3, h4, h5 {
   padding-right: 5%;
 }
 
-
 .date-text {
   font-style: italic;
   font-size: 14px;
@@ -64,31 +63,28 @@ h2, h3, h4, h5 {
   color: #999999;
   line-height: 16px;
   float: right;
-
 }
 
-p {
-  font-size: 14px;
-  color: #333333;
-  line-height: 21px;
-}
+p {}
 
 a {
-  color: #1199C3;
+  color: #128cf4;
   text-decoration: none;
   margin-top: 10px;
   display: block;
 }
 
+.role {
+  display: block;
+}
+
 .welcome-message {
-  font-style: italic;
-  font-size: 18px;
-  color: #F3F3F3;
-  line-height: 28px;
+  display: block;
 }
 
 #skillsH3 {
-  color: #F5AE23;
+  font-weight: bold;
+  display: inline;
   display: none;
 }
 
@@ -97,18 +93,26 @@ a {
 }
 
 .orange-text {
-  color: #F5AE23;
+  /*color: #F5AE23;*/
 }
 
 .white-text {
-  font-weight: bold;
-  color: #FFFFFF;
+  /*color: #fff;*/
 }
 
 .gray {
-  background-color: #F3F3F3;
-  padding-bottom: 10px;
+  background-color: #fafafa;
+  padding: 20px 0 10px 0;
   clear:both;
+}
+
+#projects {
+  padding: 20px 0 10px 0;
+}
+
+.work-entry,
+.project-entry {
+  margin-bottom: 30px;
 }
 
 .dark-gray {
@@ -116,8 +120,10 @@ a {
 }
 
 /* TODO: Replace with image later */
-#header {
-  background-color: #484848;
+#header {}
+
+#topContacts {
+  clear: both;
 }
 
 .flex-box {
@@ -125,8 +131,12 @@ a {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 10px;
+  /*justify-content: space-around;*/
+  padding: 10px 0;
+}
+
+ul#skills {
+  display: inline-flex;
 }
 
 .center-content {
@@ -140,11 +150,20 @@ ul {
   list-style-type: none;
 }
 
+.pic-container {
+  width: 100%;
+  margin-bottom: 8px;
+  display: inline-block;
+}
 
 .biopic {
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  overflow: hidden;
   float: left;
-  padding: 10px;
-  width: 200px;
+  padding: 0;
+  width: 100px;
   display: none;
 }
 
@@ -171,6 +190,7 @@ span {
 
 #letsConnect {
   text-align: center;
+  margin-top: 10%;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -180,9 +200,9 @@ span {
 }
 
 @media only screen and (max-width:900px) {
-  .biopic {
+  /*.biopic {
     width: 175px;
-  }
+  }*/
 }
 
 @media only screen and (max-width: 750px) {
@@ -211,7 +231,10 @@ span {
 }
 
 @media only screen and (min-width: 750px) {
-  #skillsH3,
+  #skillsH3 {
+    display: inline;
+  }
+
   .biopic {
     display: block;
   }

@@ -65,7 +65,7 @@ The International Name challenge in Lesson 2 where you'll create a function that
 $(document).ready(function() {
   $('button').click(function() {
     var iName = inName(name) || function(){};
-    $('#name').html(iName);  
+    $('#name').html(iName);
   });
 })
 
@@ -85,7 +85,9 @@ function logClicks(x,y) {
 }
 
 $(document).click(function(loc) {
-  // your code goes here!
+  var x = loc.pageX;
+  var y = loc.pageY;
+  logClicks(x,y);
 });
 
 
@@ -103,7 +105,7 @@ Start here! initializeMap() is called when page is loaded.
 */
 function initializeMap() {
 
-  var locations;        
+  var locations;
 
   var mapOptions = {
     disableDefaultUI: true
@@ -113,19 +115,18 @@ function initializeMap() {
   // <div id="map">, which is appended as part of an exercise late in the course.
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
 
-
   /*
   locationFinder() returns an array of every location string from the JSONs
   written for bio, education, and work.
   */
   function locationFinder() {
-    
+
     // initializes an empty array
     var locations = [];
 
     // adds the single location property from bio to the locations array
     locations.push(bio.contacts.location);
-    
+
     // iterates through school locations and appends each location to
     // the locations array
     for (var school in education.schools) {
@@ -137,7 +138,6 @@ function initializeMap() {
     for (var job in work.jobs) {
       locations.push(work.jobs[job].location);
     }
-
     return locations;
   }
 
@@ -150,7 +150,8 @@ function initializeMap() {
 
     // The next lines save location data from the search result object to local variables
     var lat = placeData.geometry.location.k;  // latitude from the place service
-    var lon = placeData.geometry.location.B;  // longitude from the place service
+    // changed location.B to location.D -- given code wasn't working.
+    var lon = placeData.geometry.location.D;  // longitude from the place service
     var name = placeData.formatted_address;   // name of the place from the place service
     var bounds = window.mapBounds;            // current boundaries of the map window
 
@@ -160,17 +161,19 @@ function initializeMap() {
       position: placeData.geometry.location,
       title: name
     });
-    
+
+
     // infoWindows are the little helper windows that open when you click
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: name
+      content: "<strong>"+name+"</strong>"
     });
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      infoWindow.open(map,marker);
     });
 
     // this is where the pin actually gets added to the map.
@@ -201,7 +204,7 @@ function initializeMap() {
     // creates a Google place search service object. PlacesService does the work of
     // actually searching for location data.
     var service = new google.maps.places.PlacesService(map);
-    
+
     // Iterates through the array of locations, creates a search object for each location
     for (place in locations) {
 
@@ -210,7 +213,7 @@ function initializeMap() {
         query: locations[place]
       }
 
-      // Actually searches the Google Maps API for location data and runs the callback 
+      // Actually searches the Google Maps API for location data and runs the callback
       // function with the search results after each search.
       service.textSearch(request, callback);
     }
@@ -225,7 +228,7 @@ function initializeMap() {
   // pinPoster(locations) creates pins on the map for each location in
   // the locations array
   pinPoster(locations);
-  
+
 };
 
 /*
@@ -233,11 +236,11 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
-// Vanilla JS way to listen for resizing of the window 
+// Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
-  // Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+window.addEventListener('resize', function(e) {
+//   Make sure the map bounds get updated on page resize
+  map.fitBounds(mapBounds);
+});
